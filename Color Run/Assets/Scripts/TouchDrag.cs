@@ -24,6 +24,7 @@ public class TouchDrag : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (GameManager.instance.isGameOver) return;
 		TouchControl ();
 	}
 

@@ -17,19 +17,25 @@ public class GameManager : MonoBehaviour
     [Space]
     public GameObject restartButton;
     public Image barImg;
+    public GameObject nextLevelButton;
+    public Text curLevelText, nextLevelText;
+    public GameObject playButton;
 
     [Space]
     public Transform fireWorks;
 
     [Space]
     [SerializeField] float currentTime;
-    [SerializeField] float finishLineDistance;
+    public float finishLineDistance;
+
+    [Header("Testing")]
+    [Space]
+    public bool isGodMod;
 
     Transform cameraTransform;
     Vector3 camToPlayerOffset;
     Vector2 targetCurve;
     ParticleSystem fireworksParticle;
-    float endPoint;
     float finishLineDistanceTemp;
 
     public bool isGameOver = false;
@@ -51,9 +57,6 @@ public class GameManager : MonoBehaviour
         playerScript = playerTransform.GetComponent<PlayerScript>();
 
         targetCurve = new Vector2(Random.Range(-4f, 4f), Random.Range(-4f, 4f));
-
-        endPoint = GameObject.FindGameObjectWithTag("finishLine").transform.position.z;
-        finishLineDistance = endPoint - playerTransform.position.z;
     }
 
     private void Update()
@@ -112,7 +115,17 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void PlayButton() {
+        Time.timeScale = 1;
+    }
+
     public void RestartScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void NextLevel() {
+        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
+        PlayerPrefs.SetInt("CurrentLevel", currentLevel + 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -11,6 +11,8 @@ TagManager:
   - door_blue
   - door_yellow
   - finishLine
+  - speedPad
+  - Obstacle
   layers:
   - Default
   - TransparentFX
